@@ -16,7 +16,6 @@ namespace FormLogin.Controllers
         {
             ViewBag.IsLogined = Request.IsAuthenticated;
             return View();
-            return View();
         }
 
         [HttpGet]
