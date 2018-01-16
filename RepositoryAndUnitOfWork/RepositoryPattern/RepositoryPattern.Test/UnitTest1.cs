@@ -18,14 +18,17 @@ namespace RepositoryPattern.Test
         [TestMethod]
         public void TestAddPerson()
         {
-            var p = new PersonVM { Home = "luoyang", Age = 22, Name = "Jim", PersonID = 2 };
+            //var p = new PersonVM { Home = "luoyang", Age = 22, Name = "Jim", PersonID = 2 };
+            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jesk" ,PersonID=3};
             var res = new PersonManage().AddPerson(p);
             Assert.IsTrue(res);
         }
         [TestMethod]
         public void TestEditPerson()
         {
-            var p = new PersonVM { Home = "TT", Age = 22, Name = "Jim", PersonID = 2 };
+            var persons= new PersonManage().GetPersons();
+            var p = persons[0];
+            p.Name = "fixed";
             var res = new PersonManage().EditPerson(p);
             Assert.IsTrue(res);
         }
@@ -34,7 +37,8 @@ namespace RepositoryPattern.Test
         [TestMethod]
         public void TestDeletePerson()
         {
-            var p = new PersonVM { Home = "TT", Age = 22, Name = "Jim", PersonID = 2 };
+            var persons = new PersonManage().GetPersons();
+            var p = persons[0];
             var res = new PersonManage().DeletePerson(p);
             Assert.IsTrue(res);
         }

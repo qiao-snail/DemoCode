@@ -26,6 +26,7 @@ namespace RepositoryPattern.Core
                 using (var context = new RepositoryDemoEntities())
                 {
                     new EFBaseRepository<TPerson>(context).Insert(p);
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -43,9 +44,10 @@ namespace RepositoryPattern.Core
                 using (var context = new RepositoryDemoEntities())
                 {
                     new EFBaseRepository<TPerson>(context).Update(p);
+                    context.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -60,6 +62,7 @@ namespace RepositoryPattern.Core
                 using (var context = new RepositoryDemoEntities())
                 {
                     new EFBaseRepository<TPerson>(context).Delete(p);
+                    context.SaveChanges();
                 }
             }
             catch (Exception)

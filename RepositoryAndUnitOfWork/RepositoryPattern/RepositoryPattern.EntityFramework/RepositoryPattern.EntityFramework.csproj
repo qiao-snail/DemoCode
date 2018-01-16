@@ -113,8 +113,8 @@
       <LastGenOutput>RepositoryDemo.cs</LastGenOutput>
     </Content>
     <Content Include="RepositoryDemo_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>RepositoryDemo.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
