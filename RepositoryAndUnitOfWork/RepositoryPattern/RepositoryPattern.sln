@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.EntityFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.Core", "RepositoryPattern.Core\RepositoryPattern.Core.csproj", "{6563CE24-7F15-40FA-B27D-C48F09E7DAB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.Web", "RepositoryPattern.Web\RepositoryPattern.Web.csproj", "{481C75E1-BAE5-449C-A558-21D1165AA2E9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.Application", "RepositoryPattern.Application\RepositoryPattern.Application.csproj", "{6B719B0B-3E2C-4094-9895-F90872877DA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.Test", "RepositoryPattern.Test\RepositoryPattern.Test.csproj", "{95D0C1AC-D8DE-4C7B-A230-DC8FC890AB5C}"
@@ -27,10 +25,6 @@ Global
 		{6563CE24-7F15-40FA-B27D-C48F09E7DAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6563CE24-7F15-40FA-B27D-C48F09E7DAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6563CE24-7F15-40FA-B27D-C48F09E7DAB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{481C75E1-BAE5-449C-A558-21D1165AA2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{481C75E1-BAE5-449C-A558-21D1165AA2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{481C75E1-BAE5-449C-A558-21D1165AA2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{481C75E1-BAE5-449C-A558-21D1165AA2E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B719B0B-3E2C-4094-9895-F90872877DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B719B0B-3E2C-4094-9895-F90872877DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B719B0B-3E2C-4094-9895-F90872877DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU

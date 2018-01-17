@@ -18,7 +18,6 @@ namespace RepositoryPattern.Test
         [TestMethod]
         public void TestAddPerson()
         {
-            //var p = new PersonVM { Home = "luoyang", Age = 22, Name = "Jim", PersonID = 2 };
             var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jesk", PersonID = 3 };
             var res = new PersonManage().AddPerson(p);
             Assert.IsTrue(res);
@@ -42,25 +41,6 @@ namespace RepositoryPattern.Test
             var res = new PersonManage().DeletePerson(p);
             Assert.IsTrue(res);
         }
-
-        [TestMethod]
-        public void TestDispose()
-        {
-            ll();
-        }
-
-        private void ll()
-        {
-            new some();
-        }
     }
 
-
-    public class some : IDisposable
-    {
-        public void Dispose()
-        {
-
-        }
-    }
 }
