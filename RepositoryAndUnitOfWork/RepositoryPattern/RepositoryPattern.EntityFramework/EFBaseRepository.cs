@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryPattern.EntityFramework
 {
-    public class EFBaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class EFBaseRepository<TEntity> : IDisposable, IRepository<TEntity> where TEntity : class
     {
         internal DbContext context;
         internal DbSet<TEntity> dbSet;
@@ -19,7 +19,7 @@ namespace RepositoryPattern.EntityFramework
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
-        //public IQueryable Entities => context.Set();
+        //public IQueryable Entities => context.Set<TEntity>();
 
         public void Delete(object id)
         {
@@ -40,7 +40,6 @@ namespace RepositoryPattern.EntityFramework
             }
             dbSet.Remove(entityToDelete);
         }
-
 
         public TEntity GetByKey(object key)
         {
@@ -93,6 +92,11 @@ namespace RepositoryPattern.EntityFramework
             {
                 return query.ToList();
             }
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
     }
 }

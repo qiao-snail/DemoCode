@@ -1,6 +1,7 @@
 ﻿using RepositoryPattern.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,16 @@ namespace RepositoryPattern.Core
 {
     public class PersonService
     {
+        private EFBaseRepository<TPerson> _personRepository;
 
+        public PersonService(DbContext dbContext)
+        {
+            var context = dbContext;
+            _personRepository = new EFBaseRepository<TPerson>(context);
+        }
         public IEnumerable<TPerson> Get()
         {
-            using (var context = new RepositoryDemoEntities())
-            {
-                return new EFBaseRepository<TPerson>(context).Get();
-            }
+            return _personRepository.Get();
         }
 
 
@@ -23,11 +27,7 @@ namespace RepositoryPattern.Core
         {
             try
             {
-                using (var context = new RepositoryDemoEntities())
-                {
-                    new EFBaseRepository<TPerson>(context).Insert(p);
-                    context.SaveChanges();
-                }
+                _personRepository.Insert(p);
             }
             catch (Exception ex)
             {
@@ -41,11 +41,8 @@ namespace RepositoryPattern.Core
         {
             try
             {
-                using (var context = new RepositoryDemoEntities())
-                {
-                    new EFBaseRepository<TPerson>(context).Update(p);
-                    context.SaveChanges();
-                }
+                _personRepository.Update(p);
+
             }
             catch (Exception ex)
             {
@@ -58,12 +55,7 @@ namespace RepositoryPattern.Core
         {
             try
             {
-
-                using (var context = new RepositoryDemoEntities())
-                {
-                    new EFBaseRepository<TPerson>(context).Delete(p);
-                    context.SaveChanges();
-                }
+                _personRepository.Delete(p);
             }
             catch (Exception)
             {

@@ -18,6 +18,7 @@ namespace RepositoryPattern.EntityFramework
         public RepositoryDemoEntities()
             : base("name=RepositoryDemoEntities")
         {
+           
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

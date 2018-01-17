@@ -1,5 +1,6 @@
 ﻿using RepositoryPattern.Application.ViewModels;
 using RepositoryPattern.Core;
+using RepositoryPattern.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +13,47 @@ namespace RepositoryPattern.Application
     {
         public IList<PersonVM> GetPersons()
         {
-            var list = new PersonService().Get();
-            var result = new List<PersonVM>();
-            foreach (var item in list)
+            using (var context = new RepositoryDemoEntities())
             {
-                result.Add(new PersonVM { Name = item.Name, Age = item.Age, Home = item.Home, PersonID = item.Id });
+                var list = new PersonService(context).Get();
+                var result = new List<PersonVM>();
+                foreach (var item in list)
+                {
+                    result.Add(new PersonVM { Name = item.Name, Age = item.Age, Home = item.Home, PersonID = item.Id });
+                }
+                return result;
             }
-            return result;
         }
 
         public bool AddPerson(PersonVM p)
         {
-            return new PersonService().AddPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+            using (var context = new RepositoryDemoEntities())
+            {
+                var result = new PersonService(context).AddPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+                context.SaveChanges();
+                return result;
+            }
         }
 
         public bool DeletePerson(PersonVM p)
         {
-            return new PersonService().DeletePerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+            using (var context = new RepositoryDemoEntities())
+            {
+                var result = new PersonService(context).DeletePerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+                context.SaveChanges();
+                return result;
+            }
         }
 
         public bool EditPerson(PersonVM p)
         {
-            return new PersonService().EditPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+            using (var context = new RepositoryDemoEntities())
+            {
+                var result = new PersonService(context).EditPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+                context.SaveChanges();
+                return result;
+            }
         }
     }
+
 }

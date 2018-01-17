@@ -19,14 +19,14 @@ namespace RepositoryPattern.Test
         public void TestAddPerson()
         {
             //var p = new PersonVM { Home = "luoyang", Age = 22, Name = "Jim", PersonID = 2 };
-            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jesk" ,PersonID=3};
+            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jesk", PersonID = 3 };
             var res = new PersonManage().AddPerson(p);
             Assert.IsTrue(res);
         }
         [TestMethod]
         public void TestEditPerson()
         {
-            var persons= new PersonManage().GetPersons();
+            var persons = new PersonManage().GetPersons();
             var p = persons[0];
             p.Name = "fixed";
             var res = new PersonManage().EditPerson(p);
@@ -41,6 +41,26 @@ namespace RepositoryPattern.Test
             var p = persons[0];
             var res = new PersonManage().DeletePerson(p);
             Assert.IsTrue(res);
+        }
+
+        [TestMethod]
+        public void TestDispose()
+        {
+            ll();
+        }
+
+        private void ll()
+        {
+            new some();
+        }
+    }
+
+
+    public class some : IDisposable
+    {
+        public void Dispose()
+        {
+
         }
     }
 }
