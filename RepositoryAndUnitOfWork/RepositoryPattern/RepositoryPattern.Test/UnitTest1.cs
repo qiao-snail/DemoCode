@@ -18,7 +18,7 @@ namespace RepositoryPattern.Test
         [TestMethod]
         public void TestAddPerson()
         {
-            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jesk", PersonID = 3 };
+            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jessica", PersonID = 3 };
             var res = new PersonManage().AddPerson(p);
             Assert.IsTrue(res);
         }

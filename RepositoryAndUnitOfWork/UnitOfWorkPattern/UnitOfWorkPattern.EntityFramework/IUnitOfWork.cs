@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 namespace UnitOfWorkPattern.EntityFramework
 {
     /// <summary>
-    ///     业务单元操作接口
+    /// 业务单元操作接口
     /// </summary>
     public interface IUnitOfWork
     {
-      
-
 
         #region 方法
 
