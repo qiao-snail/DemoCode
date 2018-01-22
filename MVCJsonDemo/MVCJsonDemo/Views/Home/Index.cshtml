@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <input type="button" value="请求Json" class="btn btn-success" name="btn-sure" id="btn-sure" />
+</div>
+
+<div>
+    <input type="button" value="请求Json1" class="btn btn-success" name="btn-sure1" id="btn-sure1" />
+
+</div>
+@section Scripts{
+    <script>
+        $('#btn-sure').click(function () {
+            $.get('@Url.Action("GetJson1", "Home")')
+                .done(function (data) {
+                    console.log(data.Home + data.Age + data.Name);
+                })
+                .fail(function (data) {
+                    alert(data);
+            })
+
+        });
+        //获取字典数据
+        $('#btn-sure1').on('click', function () {
+            $.get('@Url.Action("GetJson2", "Home")')
+                .done(function (data) {
+                    var obj = JSON.parse(data);
+                    var objKeys = Object.keys(obj);
+                    for (var i = 1; i <= objKeys.length; i++) {
+                        console.log(obj[i]);
+                    }
+                })
+                .fail(function (data) {
+                alert(data);
+            })
+        });
+    </script>
+
+}
