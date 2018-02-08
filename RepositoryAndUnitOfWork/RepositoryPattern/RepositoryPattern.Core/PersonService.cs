@@ -37,6 +37,19 @@ namespace RepositoryPattern.Core
             return true;
         }
 
+        public bool AddPersons(IList<TPerson> persons)
+        {
+            try
+            {
+                _personRepository.Insert(persons);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public bool EditPerson(TPerson p)
         {
             try

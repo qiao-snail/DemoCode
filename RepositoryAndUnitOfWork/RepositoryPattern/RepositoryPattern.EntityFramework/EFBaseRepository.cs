@@ -48,12 +48,14 @@ namespace RepositoryPattern.EntityFramework
 
         public void Insert(TEntity entity)
         {
+            context.Entry(entity).State = EntityState.Added;
             dbSet.Add(entity);
         }
 
         public void Insert(IEnumerable<TEntity> entities)
         {
-            dbSet.AddRange(entities);
+            //dbSet.AddRange(entities);
+            context.BulkInsert(entities);
         }
 
         public void Update(TEntity entity)

@@ -11,6 +11,14 @@ namespace RepositoryPattern.Application
 {
     public class PersonManage
     {
+
+        public bool IsConnect()
+        {
+            using (var context = new RepositoryDemoEntities())
+            {
+                return true;
+            }
+        }
         public IList<PersonVM> GetPersons()
         {
             using (var context = new RepositoryDemoEntities())
@@ -29,10 +37,14 @@ namespace RepositoryPattern.Application
         {
             using (var context = new RepositoryDemoEntities())
             {
+                context.Configuration.AutoDetectChangesEnabled = true;
                 var result = new PersonService(context).AddPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
                 context.SaveChanges();
                 return result;
             }
+
+
+
         }
 
         public bool DeletePerson(PersonVM p)
@@ -50,6 +62,19 @@ namespace RepositoryPattern.Application
             using (var context = new RepositoryDemoEntities())
             {
                 var result = new PersonService(context).EditPerson(new EntityFramework.TPerson { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID });
+                context.SaveChanges();
+                return result;
+            }
+        }
+
+        public bool AddPersons(List<PersonVM> persons)
+        {
+            var list = new List<TPerson>();
+            persons.ForEach(p => list.Add(new TPerson
+            { Name = p.Name, Home = p.Home, Age = p.Age, Id = p.PersonID }));
+            using (var context = new RepositoryDemoEntities())
+            {
+                var result = new PersonService(context).AddPersons(list);
                 context.SaveChanges();
                 return result;
             }

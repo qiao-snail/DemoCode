@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepositoryPattern.Application;
 using RepositoryPattern.Application.ViewModels;
@@ -18,9 +19,23 @@ namespace RepositoryPattern.Test
         [TestMethod]
         public void TestAddPerson()
         {
-            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jessica", PersonID = 3 };
+            var p = new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jessica",  };
             var res = new PersonManage().AddPerson(p);
             Assert.IsTrue(res);
+        }
+
+        [TestMethod]
+        public void TestAddPersons()
+        {
+            List<PersonVM> list = new List<PersonVM>();
+            for (int i = 0; i < 1000; i++)
+            {
+                list.Add(new PersonVM { Home = "zhengzhou", Age = 22, Name = "Jessica", PersonID = 3 });
+            }
+            var res = new PersonManage().AddPersons(list);
+            Assert.IsTrue(res);
+
+
         }
         [TestMethod]
         public void TestEditPerson()
