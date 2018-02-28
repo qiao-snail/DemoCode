@@ -28,10 +28,34 @@ namespace SnailEventBus
                 }
             }
         }
-
+        private int _timeOut = 4000;
         public void PublishAsync<TEvent>(TEvent eventItem) where TEvent : IEvent
         {
-            throw new NotImplementedException();
+            List<Task> taskList = new List<Task>();
+            if (_registeredEventsDic.ContainsKey(typeof(TEvent)))
+            {
+                var events = _registeredEventsDic[typeof(TEvent)];
+                //foreach (var item in events)
+                //{
+                //    var s = item as IEventHandler<TEvent>;
+                //    taskList.Add(Task.Run(() => s.Excute(eventItem)));
+                //}
+
+                //events.ForEach((e) => taskList.Add(Task.Run(() =>
+                //      (e as IEventHandler<TEvent>).Excute(eventItem))));
+
+
+                Parallel.ForEach(events, e => taskList.Add(Task.Run(() =>
+                {
+                    (e as IEventHandler<TEvent>).Excute(eventItem);
+                })));
+
+
+                if (_timeOut > 0)
+                    Task.WaitAll(taskList.ToArray(), _timeOut);
+                else
+                    Task.WaitAll(taskList.ToArray());
+            }
         }
 
         public void Register<TEvent>(IEventHandler<TEvent> handler) where TEvent : class, IEvent
