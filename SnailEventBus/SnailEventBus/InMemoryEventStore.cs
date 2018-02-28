@@ -14,16 +14,17 @@ namespace SnailEventBus
         /// <summary>
         /// 源和事件的字典
         /// </summary>
-        private readonly Dictionary<Type, List<IEventHandler<IEventData>>> _registeredEventsDic = new Dictionary<Type, List<IEventHandler<IEventData>>>();
+        private readonly Dictionary<Type, List<object>> _registeredEventsDic = new Dictionary<Type, List<object>>();
 
-        public void Publish<TEvent>(TEvent eventItem) where TEvent : IEvent
+        public void Publish<TEvent>(TEvent tevent) where TEvent : class, IEvent
         {
             if (_registeredEventsDic.ContainsKey(typeof(TEvent)))
             {
                 var list = _registeredEventsDic[typeof(TEvent)];
                 foreach (var item in list)
                 {
-                    item.Excute(null);
+                    var s = item as IEventHandler<TEvent>;
+                    s.Excute(tevent);
                 }
             }
         }
@@ -33,29 +34,42 @@ namespace SnailEventBus
             throw new NotImplementedException();
         }
 
-        public void Register<TEvent>(Action act) where TEvent : IEvent
+        public void Register<TEvent>(IEventHandler<TEvent> handler) where TEvent : class, IEvent
         {
-            if (act == null)
-                throw new ArgumentNullException(nameof(act));
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
             if (!_registeredEventsDic.ContainsKey(typeof(TEvent)))
             {
-                _registeredEventsDic.Add(typeof(TEvent), new List<IEventHandler<IEventData>>() { new EventHandler(act) });
+                _registeredEventsDic.Add(typeof(TEvent), new List<object>() { handler });
             }
             else
             {
-                _registeredEventsDic[typeof(TEvent)].Add(new EventHandler(act));
+                _registeredEventsDic[typeof(TEvent)].Add(handler);
             }
         }
 
-        public void UnRegister<TEvent>(TEvent eventItem) where TEvent : IEvent
+        public void UnRegister<TEvent>() where TEvent : IEvent
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnRegisterEvent<TEvent>() where TEvent : IEvent
+        {
+            if (_registeredEventsDic.ContainsKey(typeof(TEvent)))
+            {
+                _registeredEventsDic.Remove(typeof(TEvent));
+            }
+
+        }
+
+        public void UnRegisterHandler<TEvent>(IEventHandler<TEvent> handler) where TEvent : IEvent
         {
             if (_registeredEventsDic.ContainsKey(typeof(TEvent)))
             {
                 var list = _registeredEventsDic[typeof(TEvent)];
-                var item = list.FirstOrDefault(x => x.ToString() == eventItem.ToString());
+                var item = list.FirstOrDefault(x => x.ToString() == handler.ToString());
                 list.Remove(item);
             }
-
         }
     }
 }

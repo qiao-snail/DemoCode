@@ -9,12 +9,12 @@ namespace SnailEventBus
     /// <summary>
     /// 执行事件接口（领域事件）
     /// </summary>
-    public interface IEventHandler<TEventArg> where TEventArg : IEventData
+    public interface IEventHandler<TEvent> where TEvent : IEvent
     {
         /// <summary>
         /// 执行事件
         /// </summary>
-        /// <param name="args">事件参数</param>
-        void Excute(TEventArg args);
+        /// <param name="eve">事件源</param>
+        void Excute(TEvent eve);
     }
 }
